@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# Add files to PATH - csg524
+export PATH=${PATH}:/shared/storage/plasmahwdisks/data/csg524/gs2
+export PATH=${PATH}:/shared/storage/plasmahwdisks/data/csg524/gs2/analysis_gs2
+
+# Unload all existing modules
+module purge
+
+# NEW MACHINES
+module load its-net
+module load its-hdd
+module load compiler/GCC/9.3.0
+module load mpi/OpenMPI/4.0.3-GCC-9.3.0
+module load data/netCDF/4.7.4-gompi-2020a data/netCDF-Fortran/4.5.3-foss-2020a #zlib/1.2.11 szip/2.1.1 hdf5/1.8.18 netcdf/4.4.1.1
+
+module load numlib/FFTW/3.3.8-gompi-2020a
+module load numlib/OpenBLAS/0.3.9-GCC-9.3.0
+module load phys/GHOST/80-foss-2020a
+
+# We have more recent versions available in the module system but
+# GS2 needs patching to use these currently so prefer these slightly
+# older versions for simplicity.
+module load numlib/PETSc/3.12.4-foss-2020a-complex-Python-3.8.2
+module load numlib/SLEPc/3.12.2-foss-2020a-complex-Python-3.8.2
+
+module load devel/ncurses/6.1
+
+# For GS2
+export MAKEFLAGS=-IMakefiles
+export GK_SYSTEM=ypi_server
+
+
+# csg524 - extra additions
+# module load devel/GObject-Introspection/1.64.0-GCCcore-9.3.0-Python-3.8.2
+# module load devel/GObject-Introspection/1.72.0-GCCcore-11.3.0
+# module load lang/Python/3.10.4-GCCcore-11.3.0
+# module load lang/Python/3.10.8-GCCcore-12.2.0
+
+module load vis/X11/20220504-GCCcore-11.3.0
+source /shared/storage/plasmahwdisks/data/csg524/analysis_gs2/.venv/bin/activate
+
+# module load vis/GTK+/3.24.17-GCCcore-9.3.0
+
+export PYTHONPATH="/shared/storage/plasmahwdisks/data/csg524/analysis_gs2/.venv/lib/python3.8/site-packages:$PYTHONPATH"
+
