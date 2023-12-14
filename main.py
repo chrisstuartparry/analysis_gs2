@@ -31,7 +31,7 @@ def extract_n0(directory: str) -> Union[str, None]:
         return None
 
 
-def process_data(file_path: str) -> None:
+def process_data(axs, row, col, file_path) -> None:
     data = Dataset(
         file_path,
         "r",
@@ -46,13 +46,12 @@ def process_data(file_path: str) -> None:
     ]  # Extracts the second component of omega for all t
     data.close()
 
-    plt.plot(t, frequency_over_all_t, label="Frequency")
-    plt.plot(t, growth_rate_over_all_t, label="Growth Rate")
-    plt.xlabel("Time")
-    plt.ylabel("Frequency & Growth Rate")
-    plt.title(f"Frequency & Growth Rate vs Time for {file_path}")
-    plt.legend()
-    plt.show()
+    axs[row, col].plot(t, frequency_over_all_t, label="Frequency")
+    axs[row, col].plot(t, growth_rate_over_all_t, label="Growth Rate")
+    axs[row, col].set_xlabel("Time")
+    axs[row, col].set_ylabel("Frequency & Growth Rate")
+    axs[row, col].set_title(f"File: {os.path.basename(file_path)}")
+    axs[row, col].legend()
 
 
 directories_unsorted: list = glob.glob("parameter_scan/output_ky_*.in")
