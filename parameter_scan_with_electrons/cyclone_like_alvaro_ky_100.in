@@ -90,23 +90,23 @@
   bakdif = 0.05
 /
 
- &species_parameters_2
-   z = -1.0
-   mass = 2.74e-4
-   dens = 1.0
-   temp = 1.0
-   tprim = 6.92
-   fprim = 2.22
-   uprim = 0.0
-   vnewk = 1.97007444199
-   type = 'electron'
-   bess_fac = 1.0
- /
- 
- &dist_fn_species_knobs_2
-   fexpr = 0.48
-   bakdif = 0.05
- /
+&species_parameters_2
+  z = -1.0
+  mass = 2.74e-4
+  dens = 1.0
+  temp = 1.0
+  tprim = 6.92
+  fprim = 2.22
+  uprim = 0.0
+  vnewk = 1.97007444199
+  type = 'electron'
+  bess_fac = 1.0
+/
+
+&dist_fn_species_knobs_2
+  fexpr = 0.48
+  bakdif = 0.05
+/
 
 &init_g_knobs
   ginit_option = "noise"
