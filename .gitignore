@@ -170,5 +170,9 @@ parameter_scan_with_electrons/output_ky_*/cyclone_like_alvaro_ky_*.*
 !parameter_scan_with_electrons/output_ky_*/cyclone_like_alvaro_ky_*.in
 parameter_scan_with_electrons/output_ky_*/.cyclone_like_alvaro_ky_*.*
 
+parameter_scan/output_ky_*/cyclone_like_alvaro_ky_*.*
+!parameter_scan/output_ky_*/cyclone_like_alvaro_ky_*.in
+parameter_scan/output_ky_*/.cyclone_like_alvaro_ky_*.*
+
 csg524.code-workspace
 .vscode/
