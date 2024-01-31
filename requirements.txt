@@ -17,7 +17,7 @@ numpy==1.24.4
 packaging==23.2
 pandas==2.0.3
 pandas-stubs==2.0.3.230814
-Pillow==10.1.0
+Pillow==10.2.0
 pybind11==2.4.3
 pycairo==1.25.1
 PyGObject==3.46.0
