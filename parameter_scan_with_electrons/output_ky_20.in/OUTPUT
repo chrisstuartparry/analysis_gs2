@@ -1,0 +1,38 @@
+ Created by GS2 at 2023-12-14T16:16:58.853Z+00:00
+ GS2 version: 8.1.2-1792-gb4eecf54-dirty
+ Run UUID: 2D712039-1A2B-4F3B-8F0F-64062E7D4E48
+ GK_SYSTEM: ypi_server
+ Compiler: gfortran
+ Build tag: None
+
+Running on 16 processors 
+
+
+ Initialization              0.036 min    5.8 %
+(field matrix invert         0.000 min    0.0 %)
+(field matrix invert mpi     0.000 min    0.0 %)
+(field matrix dump           0.000 min    0.0 %)
+(field matrix read           0.000 min    0.0 %)
+ Advance steps               0.564 min   91.0 %
+(field solve                 0.120 min   19.5 %)
+(field solve mpi             0.106 min   17.2 %)
+(collisions                  0.000 min    0.0 %)
+(collisions mpi              0.000 min    0.0 %)
+(explicit/nl                 0.000 min    0.0 %)
+(explicit/nl mpi             0.000 min    0.0 %)
+(explicit/nl fft             0.000 min    0.0 %)
+(explicit/nl fields          0.000 min    0.0 %)
+(diagnostics                 0.034 min    5.5 %)
+ Re-initialize               0.000 min    0.0 %
+ Redistribute                0.000 min    0.0 %
+(redistribute mpi            0.000 min    0.0 %)
+(redistribute copy           0.000 min    0.0 %)
+ Finishing                   0.001 min    0.1 %
+ MPI                         0.115 min   18.6 %
+(Overheads                   0.000 min    0.0 %)
+(Collectives                 0.115 min   18.6 %)
+(PTP                         0.000 min    0.0 %)
+(Sync                        0.000 min    0.0 %)
+ total from timer is:     0.62 min
+
+Run finished at 2023-12-14T16:17:36.045Z+00:00

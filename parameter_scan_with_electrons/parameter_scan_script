@@ -3,7 +3,7 @@
 
 
 # Pattern to match input files
-pattern=cyclone_like_alvaro_ky_*.in
+pattern=cyclone_like_alvaro_ky_150.in
 
 # Path to the GS2 executable
 gs2_path="../../gs2/bin/gs2"  # Adjust as necessary
@@ -19,7 +19,7 @@ do
 
     cp ${file} ${output_dir}/
     # Run GS2 simulation
-    mpirun --np 8 $gs2_path ${output_dir}/${file} | tee "$output_dir/OUTPUT"
+    mpirun --np 16 $gs2_path ${output_dir}/${file} | tee "$output_dir/OUTPUT"
 
     # Wait for a while to ensure all files are generated
 
