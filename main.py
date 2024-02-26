@@ -11,6 +11,10 @@ from netCDF4 import Dataset  # noqa: E402
 
 
 def generate_fig_and_axs(num_plots: int) -> tuple:
+    """
+    Generates a figure and axes for the number of plots specified, with a maximum of 3 columns
+    num_plots: int = number of plots to be generated
+    """
     ncols = min(num_plots, 3)
     nrows = (num_plots + ncols - 1) // ncols if num_plots > 3 else 1
     fig, axs = plt.subplots(
@@ -19,7 +23,18 @@ def generate_fig_and_axs(num_plots: int) -> tuple:
     return fig, axs
 
 
-def extract_variables(file_path, over_all_t: bool = False) -> tuple:
+def extract_variables(file_path: str, over_all_t: bool = False) -> tuple:
+    """Extracts certain variables from netCDF formatted file at file_path.
+    Variables extracted are omega (itself extracted into frequency and growth rate), t, ky, and drhodpsi.
+
+
+    Args:
+        file_path (str): _description_
+        over_all_t (bool, optional): _ If over_all_t is True, the entire omega array (and t itself) is returned, otherwise the final frequency, growth rate, and ky are returned.  Defaults to False.
+
+    Returns:
+        tuple: A tuple containing the desired variables. If over_all_t is True, the tuple contains t, frequency_over_all_t, and growth_rate_over_all_t. Otherwise, the tuple contains final_frequency, final_growth_rate, and ky.
+    """
     data = Dataset(
         file_path,
         "r",
@@ -37,11 +52,14 @@ def extract_variables(file_path, over_all_t: bool = False) -> tuple:
     ky_raw = data.variables["ky"]
     ky = ky_raw[0]
     print("ky:\n", ky)
-
     drhodpsi_raw = data.variables["drhodpsi"]
     drhodpsi = drhodpsi_raw[0]
     print("drhodpsi_raw:\n", drhodpsi_raw)
     print("drhodpsi:\n", drhodpsi)
+    beta_raw = data.variables["beta"]
+    beta = beta_raw[0]
+    print("beta_raw:\n", beta_raw)
+    print("beta:\n", beta)
 
     final_frequency = omega[-1, 0, 0, 0]
     final_growth_rate = omega[-1, 0, 0, 1]
@@ -70,15 +88,15 @@ def extract_n0(directory: str) -> int:
         raise ValueError(f"Could not extract n0 value from {directory}")
 
 
-unsorted_raw_directories_without_n0: list[str] = glob.glob(
-    "parameter_scan/output_ky_*.in"
-)
+def get_raw_directories_without_n0(relative_file_path: str) -> list[str]:
+    return glob.glob(relative_file_path)
+
+
+relative_file_path: str = "exploratory_beta_scan/output_ky_*.in"
 unsorted_directories_with_n0 = [
     (extract_n0(directory), directory)
-    for directory in unsorted_raw_directories_without_n0
+    for directory in get_raw_directories_without_n0(relative_file_path)
 ]
-
-
 sorted_directories_with_n0 = sorted(
     unsorted_directories_with_n0, key=lambda directory_with_n0: directory_with_n0[0]
 )
