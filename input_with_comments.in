@@ -1,0 +1,235 @@
+&kt_grids_knobs
+grid_option = 'single'
+/
+
+&kt_grids_single_parameters
+aky = 0.14142135623730953  ! squareroot(2)/10 ; defined via aky rather than through n0
+theta0 = 0.0
+/
+
+&theta_grid_parameters  !  To start with, keep all of these constant as otherwise its changing the case (except ntheta and nperiod, as they're numerical)
+akappa = 2.6333646016138497  ! value of elongation (quite high, higher than MAST-U at 2.3ish)
+akappri = -0.39792969139124795
+geotype = 0
+nperiod = 2 !6  ! number of times around the flux surface; 2*nperiod - 1 is the total number of times around the flux surface. range suggestion: 1, 2, 3, 6; increasing this can lead to very large runtimes.
+ntheta = 64 !32  ! number of points in the parallel (or theta) direction per 2pi. range suggestion: 8, 16, 32, 64, 128, 256; can also lead to higher runtimes.
+qinp = 3.557865820000001
+r_geo = 1.9703376900820968
+rhoc = 0.6518794068573507
+rmaj = 1.9703376900820968
+shat = 4.0
+shift = -0.44888253258839783
+tri = 0.304216550791187
+tripri = 0.2493625385396089
+/
+
+&theta_grid_knobs  ! geometrical, don't really need to touch these
+equilibrium_option = 'eik'
+/
+
+&theta_grid_eik_knobs  ! geometrical, don't really need to touch these
+beta_prime_input = -0.4954784609761795
+bishop = 4
+iflux = 0
+irho = 2
+local_eq = .true.
+ntheta_geometry = 2048
+s_hat_input = 1.0736938712525506
+writelots = .true.
+/
+
+&le_grids_knobs  ! le => velocity space. Will want to test sensitivity to resolutions.
+nesub = 12 !  resolutions. lower energy region in the energy grid.  range suggestion: 4, 8, 12, 16, 20, 32. Will give an idea of error bars (which will hopefully be small)
+nesuper = 4  !  resolutions. higher energy region in the energy grid. range suggestion: 1, 2, 4, 8, 24, 32
+npassing = 15  !  resolutions. number of pitch angles in the passing region (passing instead of trapped particles; number of trapped particles is controlled by ntheta indirectly). range suggestion: 3 is minimum, 7, 15, 31. Odd because number of trapped pitch angles is always odd, so number of trapped + number of passing you get an even number; even numbers have nicer factors which can lead to faster performance somewhat.
+wfbbc_option = 'trapped'
+new_trap_int = T
+radau_gauss_grid = F
+/
+
+&dist_fn_knobs  ! can ignore
+adiabatic_option = 'iphi00=2'
+opt_source = .true.
+/
+
+&fields_knobs  ! can ignore
+field_option = 'implicit'
+/
+
+&knobs
+delt = 0.1 !0.007071067811865476  ! time step (technically should check convergence, but less important)
+fapar = 1.0
+fbpar = 1.0
+fphi = 1.0  !  electrostatic potential switch
+nstep = 40000
+zeff = 3.2276315302472764  !  physics parameter; effective charge value of an ion; thus describes average deflection an electron experiences in a collision
+/
+
+&layouts_knobs  ! can ignore
+layout = 'xyles'
+opt_local_copy = T
+/
+
+&collisions_knobs  ! can ignore
+collision_model = 'default'
+use_le_layout = T!F
+/
+
+&species_knobs
+nspec = 7
+/
+ !  Species Parameters:
+&species_parameters_1  !  electrons
+bess_fac = 1.0
+dens = 1.0
+fprim = 1.039454833927543
+mass = 0.0002724437107481638
+temp = 1.0
+tprim = 1.6612054720584681
+type = 'electron'
+uprim = 0.0
+vnewk = 0.018137666408457688
+z = -1.0
+/
+
+&dist_fn_species_knobs_1  !  Numerical options (can be ignored, probably), related to dissipation
+bakdif = 0.05  !  Provides decentering of grid points in parallel direction (theta direction)
+fexpr = 0.48  !  Decentering in time, helps to damp fast things
+/
+
+&species_parameters_2  !  deuterium
+bess_fac = 1.0
+dens = 0.40165158103386867  !  basically, density of this species compared to electrons with density of 1. Should have (charge * density) summed over ions should be 1. Won't necessarily be the case if not taking into account charge.
+fprim = 0.7980829282713948
+mass = 1.0
+temp = 1.0462949629885239
+tprim = 1.903881252918453
+type = 'ion'
+uprim = 0.0
+vnewk = 0.00011235388195972605
+z = 1.0
+/
+
+&dist_fn_species_knobs_2
+bakdif = 0.05
+fexpr = 0.48
+/
+
+&init_g_knobs  ! probably can ignore
+chop_side = .false.
+ginit_option = 'default'
+phiinit = 1e-05
+/
+
+&gs2_diagnostics_knobs  !  does what it says on the tin (diagnostics/output). Can changes if desired
+navg = 50
+nsave = 5000
+nwrite = 50
+omegatinst = 500.0
+omegatol = 0.0001
+save_for_restart = F !.true.
+write_apar_over_time = F !.true.
+write_ascii = .false.
+write_bpar_over_time = F !.true.
+write_fields = .true.
+write_final_epar = F !.true.
+write_final_fields = .true.
+write_fluxes = F !.true.
+write_nl_flux_dist = F ! .true.
+write_omega = .true.
+write_phi_over_time = F !.true.
+/
+
+&parameters  !  deprecated, as all options can be moved to &knobs
+beta = 0.08603184388998705
+/
+
+&species_parameters_3  !  tritium
+bess_fac = 1.0
+dens = 0.349161611258391
+fprim = 0.7329230888676683
+mass = 1.5
+temp = 1.0462949629885239
+tprim = 1.903881252918453
+type = 'ion'
+uprim = 0.0
+vnewk = 7.974793771253553e-05
+z = 1.0
+/
+
+&dist_fn_species_knobs_3
+bakdif = 0.05
+fexpr = 0.48
+/
+
+&species_parameters_4  !  Energetic alpha particles
+bess_fac = 1.0
+dens = 0.0010364949271104169
+fprim = 6.568029239771395
+mass = 2.0009929914086215
+temp = 76.7927986970974
+tprim = 0.3978859462656352
+type = 'ion'
+uprim = 0.0
+vnewk = 5.215589949234153e-09
+z = 2.0
+/
+
+&dist_fn_species_knobs_4
+bakdif = 0.05
+fexpr = 0.48
+/
+
+&species_parameters_5  !  Xenon
+bess_fac = 1.0
+dens = 0.0005806025651870078
+fprim = 1.6098848593080433
+mass = 65.53252046863237
+temp = 1.0462949629885239
+tprim = 1.903881252918453
+type = 'ion'
+uprim = 0.0
+vnewk = 0.105243080906524
+z = 47.85762135974495  !  Less than 54 (atomic number of xenon) as it might not be fully ionised. Also not an integer as it's averaged
+/
+
+&dist_fn_species_knobs_5
+bakdif = 0.05
+fexpr = 0.48
+/
+
+&species_parameters_6  ! Helium ash
+bess_fac = 1.0
+dens = 0.08754389934685759
+fprim = 1.9267657985670221
+mass = 2.0009929914086215
+temp = 1.0462949629885239
+tprim = 1.903881252918453
+type = 'ion'
+uprim = 0.0
+vnewk = 0.0002769884674427348
+z = 2.0
+/
+
+&dist_fn_species_knobs_6
+bakdif = 0.05
+fexpr = 0.48
+/
+
+&species_parameters_7  ! Argon
+bess_fac = 1.0
+dens = 0.002468935027615052
+fprim = 1.3829640548519562
+mass = 20.009929914086218
+temp = 1.0462949629885239
+tprim = 1.903881252918453
+type = 'ion'
+uprim = 0.0
+vnewk = 0.015916135761271762
+z = 17.918557265119965
+/
+
+&dist_fn_species_knobs_7
+bakdif = 0.05
+fexpr = 0.48
+/

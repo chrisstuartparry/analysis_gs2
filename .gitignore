@@ -160,21 +160,10 @@ cython_debug/
 #.idea/
 
 # User-added files
-*/.DC_Store
+*/.DS_Store
+.DS_Store
 
-parameter_scan_ions_only/output_ky_*/cyclone_like_alvaro_ky_*.*
-!parameter_scan_ions_only/output_ky_*/cyclone_like_alvaro_ky_*.in
-parameter_scan_ions_only/output_ky_*/.cyclone_like_alvaro_ky_*.*
-
-parameter_scan_with_electrons/output_ky_*/cyclone_like_alvaro_ky_*.*
-!parameter_scan_with_electrons/output_ky_*/cyclone_like_alvaro_ky_*.in
-parameter_scan_with_electrons/output_ky_*/.cyclone_like_alvaro_ky_*.*
-
-parameter_scan/output_ky_*/cyclone_like_alvaro_ky_*.*
-!parameter_scan/output_ky_*/cyclone_like_alvaro_ky_*.in
-parameter_scan/output_ky_*/.cyclone_like_alvaro_ky_*.*
-
-exploratory_beta_scan/output_ky_*/cyclone_like_alvaro_*.*
+parameter_scans/
 
 csg524.code-workspace
 .vscode/
