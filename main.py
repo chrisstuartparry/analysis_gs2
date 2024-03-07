@@ -115,11 +115,14 @@ def get_fig_axs_for_each_ky(relative_file_path: str, directories: list[str]) -> 
 
 def main() -> None:
     relative_file_path: str = "parameter_scans/beta_ky_scan/aky*"
+    relative_file_path_segments = relative_file_path.split("/")
+    trimmed_file_path = "/".join(relative_file_path_segments[:2])
     directories: list[str] = get_directories(relative_file_path)
     print("Directories: ", directories)
+    directories.sort()
+    print("Sorted Directories: ", directories)
     file_names: list[str] = [
-        directory.replace("parameter_scans/beta_ky_scan/", "")
-        for directory in directories
+        directory.replace(trimmed_file_path, "") for directory in directories
     ]
     file_names = [file_name.replace(".in", "") for file_name in file_names]
     fig, axs = get_fig_axs_for_each_ky(relative_file_path, directories)
@@ -134,6 +137,7 @@ def main() -> None:
             t, frequency_over_all_t, growth_rate_over_all_t = extract_variables(
                 file_path, ["ky", "beta"], over_all_t=True
             )
+
             plot_data_for_all_t(
                 axs,
                 row,
@@ -157,6 +161,7 @@ def main() -> None:
             print(f"Extra variables for {file_path} are {extra_variables_values}")
         else:
             print(f"File {file_path} not found.")
+
     print("Final values list: ", final_values)
     plt.suptitle("Frequency and Growth Rate vs Time")
     plt.show()
