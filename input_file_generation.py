@@ -1,7 +1,6 @@
 import os
 
-import f90nml
-import numpy as np
+import f90nml  # type: ignore
 
 
 def generate_input_files(input_file_path, param_group, param_name, values, output_dir):
@@ -33,8 +32,22 @@ def generate_input_files(input_file_path, param_group, param_name, values, outpu
 input_file_path = "./parameter_scans/input_with_comments.in"
 param_group = "kt_grids_single_parameters"
 param_name = "aky"
-values = np.arange(5, 155, 5) / 100
-output_dir = "./parameter_scans/beta_ky_scan/"
+values = [
+    0.755,
+    0.76,
+    0.765,
+    0.77,
+    0.775,
+    0.78,
+    0.785,
+    0.795,
+    0.805,
+    0.815,
+    0.82,
+    0.83,
+    0.84,
+]
+output_dir = "./parameter_scans/beta_ky_scan_extras/"
 
 # Generate the input files
 generate_input_files(input_file_path, param_group, param_name, values, output_dir)
