@@ -12,14 +12,16 @@ from numpy.typing import NDArray
 
 VariableSubset = NDArray | MaskedArray | Any
 
+number_of_columns: int = 5
+
 
 def generate_fig_and_axs(num_plots: int) -> tuple:
     """
-    Generates a figure and axes for the number of plots specified, with a maximum of 3 columns
+    Generates a figure and axes for the number of plots specified, with a maximum of 4 columns
     num_plots: int = number of plots to be generated
     """
-    ncols = min(num_plots, 3)
-    nrows = (num_plots + ncols - 1) // ncols if num_plots > 3 else 1
+    ncols = min(num_plots, number_of_columns)
+    nrows = (num_plots + ncols - 1) // ncols if num_plots > number_of_columns else 1
     fig, axs = plt.subplots(
         nrows, ncols, figsize=(15, 5 * nrows), constrained_layout=True, squeeze=False
     )
@@ -86,7 +88,7 @@ def plot_data_for_all_t(
     axs[row, col].plot(t, frequency_over_all_t, label="Frequency")
     axs[row, col].plot(t, growth_rate_over_all_t, label="Growth Rate")
     axs[row, col].set_xlabel("Time")
-    axs[row, col].set_ylabel("Frequency & Growth Rate")
+    axs[row, col].set_ylabel("Omega")
     axs[row, col].set_title(f"File: {os.path.basename(file_path)}")
     axs[row, col].legend()
 
@@ -133,7 +135,7 @@ def main() -> None:
     for index, directory in enumerate(directories):
         file_path = f"{directory}/{file_names[index]}.out.nc"
         if os.path.isfile(file_path):
-            row, col = divmod(index, 3)
+            row, col = divmod(index, number_of_columns)
             t, frequency_over_all_t, growth_rate_over_all_t = extract_variables(
                 file_path, ["ky", "beta"], over_all_t=True
             )
